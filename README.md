@@ -10,3 +10,5 @@ The goal is to run BOOMMediumConfig
 run
 `make SUB_PROJECT=zcu104M bitstream`
 
+Memory parameters have to be adapted in fpga-shells/src/main/scala/ip/xilinx/zcu104mig/zcu104mig.scala depending on the used SODIMM
+
