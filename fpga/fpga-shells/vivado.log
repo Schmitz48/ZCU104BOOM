@@ -1,0 +1,62 @@
+#-----------------------------------------------------------
+# Vivado v2020.1 (64-bit)
+# SW Build 2902540 on Wed May 27 19:54:35 MDT 2020
+# IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+# Start of session at: Fri May 20 14:11:01 2022
+# Process ID: 2044344
+# Current directory: /import/home/schmitz/chipyard/fpga/fpga-shells
+# Command line: vivado
+# Log file: /import/home/schmitz/chipyard/fpga/fpga-shells/vivado.log
+# Journal file: /import/home/schmitz/chipyard/fpga/fpga-shells/vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_hw_manager
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/import/public/common/Xilinx/Vivado/2020.1/data/ip'.
+open_hw_manager: Time (s): cpu = 00:00:12 ; elapsed = 00:00:07 . Memory (MB): peak = 7076.805 ; gain = 53.086 ; free physical = 10155 ; free virtual = 23666
+connect_hw_server -allow_non_jtag
+INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121
+INFO: [Labtools 27-2222] Launching hw_server...
+INFO: [Labtools 27-2221] Launch Output:
+
+****** Xilinx hw_server v2020.1
+  **** Build date : May 27 2020 at 20:33:44
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+
+INFO: [Labtools 27-3415] Connecting to cs_server url TCP:localhost:3042
+INFO: [Labtools 27-3417] Launching cs_server...
+INFO: [Labtools 27-2221] Launch Output:
+
+
+****** Xilinx cs_server v2020.1.0
+  **** Build date : May 14 2020-03:10:29
+    ** Copyright 2017-2020 Xilinx, Inc. All Rights Reserved.
+
+
+
+connect_hw_server: Time (s): cpu = 00:00:04 ; elapsed = 00:00:07 . Memory (MB): peak = 7083.949 ; gain = 0.105 ; free physical = 10041 ; free virtual = 23601
+open_hw_target
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Xilinx/46409A
+open_hw_target: Time (s): cpu = 00:00:03 ; elapsed = 00:00:07 . Memory (MB): peak = 7840.984 ; gain = 757.035 ; free physical = 8827 ; free virtual = 22394
+current_hw_device [get_hw_devices xczu7_0]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xczu7_0] 0]
+INFO: [Labtools 27-2302] Device xczu7 (JTAG device index = 0) is programmed with a design that has 1 MIG core(s).
+current_hw_device [get_hw_devices arm_dap_1]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices arm_dap_1] 0]
+current_hw_device [get_hw_devices xczu7_0]
+set_property PROBES.FILE {} [get_hw_devices xczu7_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xczu7_0]
+set_property PROGRAM.FILE {/import/home/schmitz/chipyard/fpga/generated-src/chipyard.fpga.zcu104.ZCU104FPGATestHarness.BoomMediumZCU104Config/obj/ZCU104FPGATestHarness.bit} [get_hw_devices xczu7_0]
+program_hw_devices [get_hw_devices xczu7_0]
+INFO: [Labtools 27-3164] End of startup status: HIGH
+program_hw_devices: Time (s): cpu = 00:00:13 ; elapsed = 00:00:11 . Memory (MB): peak = 7929.695 ; gain = 0.000 ; free physical = 14759 ; free virtual = 27486
+refresh_hw_device [lindex [get_hw_devices xczu7_0] 0]
+WARNING: [Labtools 27-3089] Calibration is still in-progress.
+INFO: [Labtools 27-2302] Device xczu7 (JTAG device index = 0) is programmed with a design that has 1 MIG core(s).
+INFO: [Labtools 27-3143] Calibration status change detected, refreshing MIG_1
+WARNING: [Labtools 27-3089] Calibration is still in-progress.
+INFO: [Labtools 27-3143] Calibration status change detected, refreshing MIG_1
+INFO: [Labtools 27-3143] Calibration status change detected, refreshing MIG_1
+ERROR: [Labtoolstcl 44-513] HW Target shutdown. Closing target: localhost:3121/xilinx_tcf/Xilinx/46409A
