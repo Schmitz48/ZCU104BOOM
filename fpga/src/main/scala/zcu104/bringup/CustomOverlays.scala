@@ -129,7 +129,7 @@ abstract class TSIHostPlacedOverlay[IO <: Data](val name: String, val di: TSIHos
   implicit val p = di.p
 }
 
-case object TSIHostZCU104DDRSize extends Field[BigInt](0x40000000L * 1) // 8GB
+case object TSIHostZCU104DDRSize extends Field[BigInt](0x40000000L * 2) // 8GB
 class TSIHostZCU104PlacedOverlay(val shell: BringupZCU104FPGATestHarness, name: String, val designInput: TSIHostDesignInput, val shellInput: TSIHostShellInput)
   extends TSIHostPlacedOverlay[TSIHostWidgetIO](name, designInput, shellInput)
 {

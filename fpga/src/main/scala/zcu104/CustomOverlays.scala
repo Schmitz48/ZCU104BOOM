@@ -31,7 +31,7 @@ class SysClock2ZCU104ShellPlacer(shell: ZCU104ShellBasicOverlays, val shellInput
     def place(designInput: ClockInputDesignInput) = new SysClock2ZCU104PlacedOverlay(shell, valName.name, designInput, shellInput)
 }
 
-case object ZCU104DDR2Size extends Field[BigInt](0x40000000L * 1) // 2GB
+case object ZCU104DDR2Size extends Field[BigInt](0x40000000L * 2) // 2GB
 class DDR2ZCU104PlacedOverlay(val shell: ZCU104FPGATestHarness, name: String, val designInput: DDRDesignInput, val shellInput: DDRShellInput)
   extends DDRPlacedOverlay[XilinxZCU104MIGPads](name, designInput, shellInput)
 {

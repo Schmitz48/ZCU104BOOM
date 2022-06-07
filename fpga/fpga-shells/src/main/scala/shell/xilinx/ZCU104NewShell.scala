@@ -379,7 +379,7 @@ class JTAGDebugBScanZCU104ShellPlacer(val shell: ZCU104ShellBasicOverlays, val s
   def place(designInput: JTAGDebugBScanDesignInput) = new JTAGDebugBScanZCU104PlacedOverlay(shell, valName.name, designInput, shellInput)
 }
 
-case object ZCU104DDRSize extends Field[BigInt](0x40000000L * 1) // 2GB
+case object ZCU104DDRSize extends Field[BigInt](0x40000000L * 2) // 2GB
 class DDRZCU104PlacedOverlay(val shell: ZCU104ShellBasicOverlays, name: String, val designInput: DDRDesignInput, val shellInput: DDRShellInput)
   extends DDRPlacedOverlay[XilinxZCU104MIGPads](name, designInput, shellInput)
 {
