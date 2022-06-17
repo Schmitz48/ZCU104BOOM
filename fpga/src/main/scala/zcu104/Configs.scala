@@ -63,10 +63,6 @@ class RocketZCU104Config extends Config(
   new chipyard.RocketConfig)
 // DOC include end: AbstractZCU104 and Rocket
 
-class BoomZCU104Config extends Config(
-  new WithFPGAFrequency(50) ++
-  new WithZCU104Tweaks ++
-  new chipyard.MegaBoomConfig)
 
 class WithFPGAFrequency(fMHz: Double) extends Config(
   new chipyard.config.WithPeripheryBusFrequency(fMHz) ++ // assumes using PBUS as default freq.
@@ -80,42 +76,6 @@ class WithFPGAFreq100MHz extends WithFPGAFrequency(100)
 
 
 class BoomMediumZCU104Config extends Config(
-  new WithFPGAFrequency(50) ++
-  new WithZCU104Tweaks ++
-  new chipyard.MediumBoomConfig)
-
-
-class BoomMediumZCU104Config2 extends Config(
-  new WithFPGAFrequency(50) ++
-  new WithZCU104Tweaks ++
-  new chipyard.MediumBoomConfig)
-
-class BoomMediumZCU104ConfigEIT extends Config(
-  new WithFPGAFrequency(50) ++
-  new WithZCU104Tweaks ++
-  new chipyard.MediumBoomConfig)
-
-class BoomMediumZCU104ConfigMEM extends Config(
-  new WithFPGAFrequency(50) ++
-  new WithZCU104Tweaks ++
-  
-  new chipyard.MediumBoomConfig)
-class BoomMediumZCU104ConfigMemTest extends Config(
-  new WithFPGAFrequency(50) ++
-  new WithZCU104Tweaks ++
-  new chipyard.MediumBoomConfig)
-
-class BoomMediumZCU104ConfigSMPDisabled extends Config(
-  new WithFPGAFrequency(50) ++
-  new WithZCU104Tweaks ++
-  new chipyard.MediumBoomConfig)
-
-class BoomMediumZCU104ConfigOldSD extends Config(
-  new WithFPGAFrequency(50) ++
-  new WithZCU104Tweaks ++
-  new chipyard.MediumBoomConfig)
-
-class BoomMdeiumZCU104ConfigDebug extends Config(
   new WithFPGAFrequency(50) ++
   new WithZCU104Tweaks ++
   new chipyard.MediumBoomConfig)

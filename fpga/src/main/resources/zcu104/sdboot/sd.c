@@ -9,7 +9,7 @@
 #include "kprintf.h"
 
 // Total payload in B
-#define PAYLOAD_SIZE_B (50 << 20) // default: 30MiB
+#define PAYLOAD_SIZE_B (30 << 20) // default: 30MiB
 // A sector is 512 bytes, so (1 << 11) * 512B = 1 MiB
 #define SECTOR_SIZE_B 512
 // Payload size in # of sectors
@@ -198,63 +198,6 @@ static int copy(void)
 		do {
 			uint8_t x = sd_dummy();
 			*p = x;
-			//__asm__ __volatile__ ("fence.i" : : : "memory");
-
-			#ifdef MEM_DBG
-				prt_cnt1++;
-				if (prt_cnt1 == 4 ) {
-					prt_cnt1 = 0;
-
-					/* SD CARD PRINT */
-					// //shift in new byte
-					dbg_instr = dbg_instr >> 8;
-					dbg_instr |= x << 24;
-				
-					// // Print 1000 first bytes and instructions
-					// if (prt_cnt1 == 4 ) {
-					// 	prt_cnt2++;
-					// 	kprintf("addr: 0x%x - inst: 0x%x\r\n", (p - 3), dbg_instr);
-					// }
-
-					/* DDR print */
-					// Print instructions from the start of DRAM until the last written address (p)
-					// uint32_t instr = 0;
-					// for (volatile uint32_t* i = (void *)(PAYLOAD_DEST); i < p; i++){
-					// 	uint64_t cycles, cycles2 = 0;
-
-					// 	__asm__ __volatile__ ("csrr %0, mcycle"
-					// 							: "=r" (cycles));
-					// 	instr = *i;
-					// 	__asm__ __volatile__ ("csrr %0, mcycle"
-					// 							: "=r" (cycles2));
-
-					// 	uint64_t time = cycles2 - cycles;
-					// 	kprintf("Read from addr: 0x%x value: 0x%x - time for access: %x\r\n", i, instr, time);
-
-					// }
-					volatile uint32_t* instr = (void *)(PAYLOAD_DEST + 0xC);
-					if (*instr != 0x654000ef){
-						kprintf("0x8000000C was not 0x654000ef - p at addr: 0x%x\r\n", p);
-						kprintf("0x8000000C 	is: 0x%x - p at addr: 0x%x\r\n", instr, p);
-						kprintf("Last written instruction was: 0x%x to addr: 0x%x\r\n\r\n\r\n", dbg_instr, p);
-
-						for (volatile uint32_t* i = (void *)(PAYLOAD_DEST); i < 0x80000020; i++){
-							uint64_t cycles, cycles2 = 0;
-
-							__asm__ __volatile__ ("csrr %0, mcycle"
-													: "=r" (cycles));
-							instr = *i;
-							__asm__ __volatile__ ("csrr %0, mcycle"
-													: "=r" (cycles2));
-
-							uint64_t time = cycles2 - cycles;
-							kprintf("Read from addr: 0x%x value: 0x%x - time for access: %x\r\n", i, instr, time);
-						}
-					}
-				}
-
-			#endif
-			
 			p++;
 			crc = crc16_round(crc, x);
 		} while (--n > 0);
@@ -283,23 +226,10 @@ static int copy(void)
 }
 
 
-void test_mem() {
-	volatile uint8_t *p = (void *)(PAYLOAD_DEST);
-	kputs("TEST_MEM");
-
-	kprintf("Writing 0xde to addr: 0x%x\r\n", p);
-	*p = (uint8_t)0xde; 
-	kprintf("Read 0x%x from addr: 0x%x\r\n", *p, p);
-}
-
-
 int main(void)
 {
 	REG32(uart, UART_REG_TXCTRL) = UART_TXEN;
 	
-	test_mem();
-	kprintf("Do not disable OOO Processing\n");
-	//__asm__ __volatile__ ("csrwi 0x7c1, 0x8");
 	
 	kputs("INIT");
 	sd_poweron();
@@ -313,24 +243,6 @@ int main(void)
 		kputs("ERROR");
 		return 1;
 	}
-
-	uint32_t instr = 0;
-	
-	for (volatile uint32_t* i = (void *)0x80bbfb88; i < 0x80bbfbff; i++){
-		uint64_t cycles, cycles2 = 0;
-
-		//__asm__ __volatile__ ("csrr %0, mcycle"
-		//						: "=r" (cycles));
-		instr = *i;
-		//__asm__ __volatile__ ("csrr %0, mcycle"
-		//						: "=r" (cycles2));
-
-		uint64_t time = cycles2 - cycles;
-		kprintf("%x; %x\r\n", i, instr);//- time for access: %x\r\n", i, instr, time);
-		//__asm__ __volatile__ ("fence.i" : : : "memory");
-
-	}
-
 
 	kputs("BOOT");
 
